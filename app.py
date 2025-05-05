@@ -479,7 +479,7 @@ def x_efficiency(df_raw):
     if match:
         day, mon, year = match.groups()
         curr_month = f"MTD -{day} {mon}'{year}"
-        prev_month = pd.to_datetime(f"{day}-{mon}-{year}", format="%d-%b-%y") - pd.DateOffset(months=1)
+        prev_month = pd.to_datetime(f"{day}-{mon}-{year}", format="%d-%b-%y") - pd.DateOffset(months=2)
         prev_mon_str = prev_month.strftime("MTD -%d %b'%y")
     else:
         raise ValueError("Date format not found in filename")

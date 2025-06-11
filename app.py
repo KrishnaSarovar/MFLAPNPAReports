@@ -29,8 +29,7 @@ def mf_disb(uploaded_file):
     df_raw.columns = [' | '.join([str(i) for i in col if str(i).strip() != '']).strip() for col in df_raw.columns]
 
     df_filtered = df_raw[df_raw["Unnamed: 2_level_0 | Unnamed: 2_level_1 | Division"]
-                         .isin(['GUJARAT', 'NASHIK', 'PUNE'])].copy()
-
+                         .isin(['GUJARAT', 'NASHIK', 'PUNE','CG','MP'])].copy()
     columns_to_keep = [
         'Division', 'AREA', 'BR NAME',
         'Target | Unnamed: 6_level_1 | Count',
@@ -164,7 +163,7 @@ def mf_sourcing(df_raw):
 
     df_raw[sale_login_count_col] -= df_raw[rejected_count_col]
     df_raw[sale_login_value_col] -= df_raw[rejected_value_col]
-    df_filtered = df_raw[df_raw[division_col].isin(['GUJARAT', 'NASHIK', 'PUNE'])]
+    df_filtered = df_raw[df_raw[division_col].isin(['GUJARAT', 'NASHIK', 'PUNE','CG','MP'])]
 
     # Keep columns
     columns_to_keep = [
@@ -309,7 +308,7 @@ def npa_woff(df_raw):
 
     # Step 3: Filter only selected divisions
     div_col = 'Unnamed: 2_level_0 | Division'
-    target_divisions = ['GUJARAT', 'NASHIK', 'PUNE']
+    target_divisions = ['GUJARAT', 'NASHIK', 'PUNE','CG','MP']
     df_filtered = df_raw[df_raw[div_col].isin(target_divisions)]
 
     # Column references
@@ -486,7 +485,7 @@ def x_efficiency(df_raw):
 
     # Step 3: Filter only selected divisions
     div_col = ('Val in lacs', 'DIVISION')
-    target_divisions = ['GUJARAT', 'NASHIK', 'PUNE']
+    target_divisions = ['GUJARAT', 'NASHIK', 'PUNE','CG','MP']
     df_filtered = df_raw[df_raw[div_col].isin(target_divisions)].copy()
     # Step 4: Drop any 'Variance' column (no matter what the top-level header is)
     variance_cols = [col for col in df_filtered.columns if col[1] == 'Variance']
